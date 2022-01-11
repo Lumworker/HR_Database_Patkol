@@ -1,0 +1,384 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="HR_Portal.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <title><%: Page.Title %></title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="Content/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="Content/jquery-ui.css" rel="stylesheet" />
+    <link href="Content/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="Content/responsive.bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/morris.css" rel="stylesheet" />
+    <link href="Content/jquery.auto-complete.css" rel="stylesheet" />
+    <link href="Content/sideNav.css" rel="stylesheet" />
+    <link href="Content/forntawesome/fontawesom-all.min.css" rel="stylesheet" />
+    <link href="Content/smart_wizard.min.css" rel="stylesheet" />
+    <link href="Content/smart_wizard_theme_arrows.min.css" rel="stylesheet" />
+    <link href="Content/smart_wizard_theme_circles.min.css" rel="stylesheet" />
+    <link href="Content/smart_wizard_theme_dots.min.css" rel="stylesheet" />
+    <link href="Content/basic.min.css" rel="stylesheet" />
+    <link href="Content/dropzone.min.css" rel="stylesheet" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+
+</head>
+
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+        <script src="Scripts/jquery-ui.js"></script>
+        <script src="Scripts/raphael.min.js"></script>
+        <script src="Scripts/jquery.flot.js"></script>
+        <script src="Scripts/jquery.flot.pie.js"></script>
+        <script src="Scripts/jquery.flot.resize.js"></script>
+        <script src="Scripts/morris.js"></script>
+        <script src="Scripts/multiple-emails.js"></script>
+        <script src="Scripts/datatables.min.js"></script>
+        <script src="Scripts/dataTables.bootstrap.js"></script>
+        <script src="Scripts/dataTables.responsive.min.js"></script>
+        <script src="Scripts/Blob.min.js"></script>
+        <script src="Scripts/xlsx.core.min.js"></script>
+        <script src="Scripts/FileSaver.min.js"></script>
+        <script src="Scripts/tableexport.min.js"></script>
+        <script src="Scripts/jquery.smartWizard.min.js"></script>
+        <script src="Scripts/dropzone.min.js"></script>
+        <script src="Scripts/sweetalert.min.js"></script>
+        <script src="Scripts/Currency.js"></script>
+
+
+        <style>
+            .ui-autocomplete {
+                z-index: 999999;
+                max-height: 200px;
+                overflow-y: auto; /* prevent horizontal scrollbar */
+                overflow-x: hidden; /* add padding to account for vertical scrollbar */
+                padding-right: 20px;
+            }
+
+            .radio-group label {
+                overflow: hidden;
+            }
+
+            .radio-group input {
+                height: 1px;
+                width: 1px;
+                position: absolute;
+                top: -20px;
+            }
+
+
+            .radio-group .not-active {
+                color: #3276b1;
+                background-color: #fff;
+            }
+
+            .dropdown-menu {
+                -webkit-transition: all .5s ease-out;
+                transition: all .5s ease-out;
+                transform: rotateX(90deg);
+                transform-origin: top;
+                opacity: 0;
+                display: block;
+                border: none;
+                margin-left: 5rem;
+            }
+            .open .dropdown-menu {
+                opacity: 1;
+                transform: rotateX(0deg);
+                transform-origin: top;
+                border: none;
+                /*position: relative;*/
+                background-color:#bfbfbf;
+            }
+        </style>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <%--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>--%>
+                    <span class="navbar-brand" style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776;</span>
+                    <a href="javascript:void(0)" class="navbar-brand" style="font-size: 20px; margin-top: 0.2em; cursor: default">HR Portal</a>
+                </div>
+                <%--<div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                    </ul>
+                </div>--%>
+                <div id="mySidenav" class="sidenav">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <a href="javascript:void(0)" id="NewMaintain">Maintain Employee</a>
+                    <a href="javascript:void(0)" id="MaintainBenefits">Maintain Benefits</a>
+                    <a href="javascript:void(0)" id="MaintainE-Reg">Maintain E-Regular</a>
+                    <a href="javascript:void(0)" id="MaintainPosition">Maintain Position</a>
+                    <div class="dropdown">
+                        <a id="leaveMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Maintain Leave <span style="font-size: 15px;" class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>
+                        <ul class="dropdown-menu animate" aria-labelledby="leaveMenu" >
+                            <li><a href="javascript:void(0)" id="LeaveMaintain" style="font-size: 18px;">Leave Master Data</a></li>
+                            <li><a href="javascript:void(0)" id="LeaveTranfer" style="font-size: 18px;">Leave Transaction</a></li>
+                            <li><a href="javascript:void(0)" id="LeaveReport" style="font-size: 18px;">Leave Report</a></li>
+                        </ul>
+                    </div>
+                    <a href="javascript:void(0)" id="ITMaintain">Maintain IT</a>
+                    <a href="javascript:void(0)" id="Permission">Permission</a>
+                    <a href="javascript:void(0)" id="OTTrans">Import OT Transction</a>
+                    <div class="dropdown">
+                        <a  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Maintain PATAG <span style="font-size: 15px;" class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>
+                        <ul class="dropdown-menu animate" aria-labelledby="PATAG Menu" >
+                           <%-- <li><a href="javascript:void(0)" id="PATAG" style="font-size: 18px;">PATAG</a></li>
+                            <li><a href="javascript:void(0)" id="PATAG_Group" style="font-size: 18px;">PA Group</a></li>
+                            <li><a href="javascript:void(0)" id="PATAG_Charge" style="font-size: 18px;">PA Charge</a></li>
+                            <li><a href="javascript:void(0)" id="PATAG_ServiceCenterofRepairing" style="font-size: 18px;">CarService Center</a></li>
+                            <li><a href="javascript:void(0)" id="PATAG_Export" style="font-size: 18px;">PA Report</a></li>--%>
+                            <li><a href="./PATAG.aspx" id="PATAG" style="font-size: 18px;">PATAG</a></li>
+                            <li><a href="./PATAG_Group.aspx" id="PATAG_Group" style="font-size: 18px;">PA Group</a></li>
+                            <li><a href="./PATAG_Charge.aspx" id="PATAG_Charge" style="font-size: 18px;">PA Charge</a></li>
+                            <li><a href="./PATAG_ServiceCenterofRepairing.aspx" id="PATAG_ServiceCenterofRepairing" style="font-size: 18px;">CarService Center</a></li>
+                            <li><a href= "./PATAG_Export.aspx" id="PATAG_Export" style="font-size: 18px;">PA Report</a></li>
+                        </ul>
+                    </div>
+
+                    <%--                    <a href="LoginPM.aspx">Logout</a>--%>
+                </div>
+
+                <div class="btn-group radio-group" style="margin-top: 1em; float: right">
+
+                    <label id="lbTH" class="btn btn-primary">TH<input id="TH" type="radio" value="TH" name="Type"></label>
+                    <label id="lbEN" class="btn btn-primary not-active">EN<input id="EN" type="radio" value="EN" name="Type"></label>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - HR Database</p>
+            </footer>
+        </div>
+        
+         <div class="modal fade" id="IMGUpload" style=" position: fixed; z-index: 9999; overflow: auto; top: 40%;text-align:center;" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <img src="images/PATKOL2.gif" class="modal-content imgPreviewG" style="width: 10em; height: 10em;">
+            </div>
+        </div>
+
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                if (localStorage.getItem("type") == "EN") {
+                    $("#lbTH").addClass("not-active");
+                    $("#lbEN").removeClass("not-active");
+                } else {
+                    localStorage.setItem("type", "TH");
+                    $("#lbTH").removeClass("not-active");
+                    $("#lbEN").addClass("not-active");
+                }
+
+                $("#NewMaintain").on('click', function () {
+                    //alert(localStorage.getItem("type"));
+                    window.location.href = "./MaintainEmployee.aspx"
+                });
+                $("#MaintainBenefits").on('click', function () {
+                    //alert(localStorage.getItem("type"));
+                    window.location.href = "./MaintainBenefits.aspx"
+                });
+                $("#ITMaintain").on('click', function () {
+                    //alert(localStorage.getItem("type"));
+                    var Emp_Num = (typeof getAllUrlParams("Emp_Num") === "undefined") ? "" : "?Emp_Num=" + getAllUrlParams("Emp_Num");
+                    if (Emp_Num) {
+                        window.location.href = "./ITMaintain.aspx" + Emp_Num;
+                    }
+                    else {
+                        window.location.href = "./ITMaintain.aspx";
+                    }
+                });
+                $("#Permission").on('click', function () {
+                    window.location.href = "./Permission.aspx"
+                });
+
+                $("#LeaveMaintain").on('click', function () {
+                    window.location.href = "./LeaveMaintain.aspx"
+                });
+
+                $("#LeaveTranfer").on('click', function () {
+                    window.location.href = "./LeaveTranfer.aspx"
+                });
+
+                $("#LeaveReport").on('click', function () {
+                    window.location.href = "./LeaveReport.aspx"
+                });
+
+                $("#MaintainE-Reg").on('click', function () {
+                    window.location.href = "./MaintainE-Regular.aspx"
+                });
+
+                $("#OTTrans").on('click', function () {
+                    window.location.href = "./LoadOTTrans.aspx"
+                });
+                
+                $("#PATAG").on('click', function () {
+                    window.location.href = "./PATAG.aspx"
+                });
+                $("#PATAG_Group").on('click', function () {
+                    window.location.href = "./PATAG_Group.aspx"
+                });
+                $("#PATAG_Charge").on('click', function () {
+                    window.location.href = "./PATAG_Charge.aspx"
+                });
+                $("#PATAG_ServiceCenterofRepairing").on('click', function () {
+                    window.location.href = "./PATAG_ServiceCenterofRepairing.aspx"
+                });
+                $("#PATAG_Export").on('click', function () {
+                    window.location.href = "./PATAG_Export.aspx"
+                });
+                $("#MaintainPosition").on('click', function () {
+                    window.location.href = "./MaintainPosition.aspx"
+                });
+
+                $("input[name=Type]").change(function () {
+                    var Emp_Num = (typeof getAllUrlParams("Emp_Num") === "undefined") ? "" : "?Emp_Num=" + getAllUrlParams("Emp_Num");
+
+                    if ($("#TH").is(":checked")) {
+                        localStorage.setItem("type", "TH");
+                        $("#lbTH").removeClass("not-active");
+                        $("#lbEN").addClass("not-active");
+                        if (sessionStorage.getItem('Page_type') == 'Master') {
+                            window.location.href = "./MaintainEmployee.aspx" + Emp_Num;
+                        }
+                        else if (sessionStorage.getItem('Page_type') == 'Draft') {
+                            window.location.href = "./MaintainEmployee_Draft.aspx" + Emp_Num;
+                        }
+                        else if (sessionStorage.getItem('Page_type') == 'ITMaintain') {
+                            window.location.href = "./ITMaintain.aspx" + Emp_Num;
+                        }
+                        else if (sessionStorage.getItem('Page_type') == 'Permission') {
+                            window.location.href = "./Permission.aspx"
+                        }
+                        else if (sessionStorage.getItem('Page_type') == 'LeaveMaintain') {
+                            window.location.href = "./LeaveMaintain.aspx"
+                        }
+                        else if (sessionStorage.getItem('Page_type') == 'LeaveTransfer') {
+                            window.location.href = "./LeaveTranfer.aspx"
+                        }
+                        else if (sessionStorage.getItem('Page_type') == 'Benefits') {
+                            window.location.href = "./MaintainBenefits.aspx"
+                        }
+
+                    } else {
+                        localStorage.setItem("type", "EN");
+                        $("#lbTH").addClass("not-active");
+                        $("#lbEN").removeClass("not-active");
+                        if (sessionStorage.getItem('Page_type') == 'Master') {
+                            window.location.href = "./MaintainEmployee.aspx" + Emp_Num;
+                        }
+                        else if (sessionStorage.getItem('Page_type') == 'Draft') {
+                            window.location.href = "./MaintainEmployee_Draft.aspx" + Emp_Num;
+                        }
+                        else if (sessionStorage.getItem('Page_type') == 'ITMaintain') {
+                            window.location.href = "./ITMaintain.aspx" + Emp_Num;
+                        }
+                        else if (sessionStorage.getItem('Page_type') == 'Permission') {
+                            window.location.href = "./Permission.aspx"
+                        }
+                        else if (sessionStorage.getItem('Page_type') == 'LeaveMaintain') {
+                            window.location.href = "./LeaveMaintain.aspx"
+                        }
+                        else if (sessionStorage.getItem('Page_type') == 'LeaveTransfer') {
+                            window.location.href = "./LeaveTranfer.aspx"
+                        }
+                        else if (sessionStorage.getItem('Page_type') == 'Benefits') {
+                            window.location.href = "./MaintainBenefits.aspx"
+                        }
+                    }
+                    //alert(localStorage.getItem("type"));
+                });
+
+            });
+
+            function insertFile(data, Emp_Num, name, floderName) {
+                var formData = new FormData();
+                formData.append('file', data);
+                formData.append('Emp_Num', Emp_Num);
+                formData.append('name', name);
+                formData.append('floderName', floderName);
+                $.ajax({
+                    type: 'post',
+                    url: 'UploadFile.ashx',
+                    data: formData,
+                    //async: false,
+                    success: function (status) {
+                        //alert("Upload Complete");
+                    },
+                    processData: false,
+                    contentType: false,
+                    error: function () {
+                        alert("Whoops something went wrong!");
+                    }
+                });
+            }
+
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "300px";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+            }
+
+            function getAllUrlParams(sParam) {
+
+                var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                    sURLVariables = sPageURL.split('&'),
+                    sParameterName,
+                    i;
+
+                for (i = 0; i < sURLVariables.length; i++) {
+                    sParameterName = sURLVariables[i].split('=');
+
+                    if (sParameterName[0] === sParam) {
+                        return sParameterName[1];
+                    } else {
+
+                    }
+                }
+            }
+
+        </script>
+    </form>
+</body>
+</html>
