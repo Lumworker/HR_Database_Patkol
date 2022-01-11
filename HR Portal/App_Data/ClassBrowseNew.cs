@@ -35,11 +35,11 @@ namespace MobileTask.AppCode
         string HA = System.Configuration.ConfigurationManager.AppSettings["HA"];
         string CHA = System.Configuration.ConfigurationManager.AppSettings["CHA"];
 
-        public static String con = "Data Source=K2DB1\\K2DBC1;Initial Catalog=K2;Persist Security Info=True;User ID=sa;Password=P@ssw0rd; Connect Timeout=0; pooling=true; Max Pool Size=50000";
-        public static String conHRPortal = "Data Source=SLDB1\\SYTELINEDBC1;Initial Catalog=HRPortal;Persist Security Info=True;User ID=sa;Password=P@ssw0rd; Connect Timeout=0; pooling=true; Max Pool Size=50000";
-        public static String conPKS = "Data Source=SLDB1\\SYTELINEDBC1;Initial Catalog=ERP_PKS_App;Persist Security Info=True;User ID=sa;Password=P@ssw0rd; Connect Timeout=0; pooling=true; Max Pool Size=50000";
-        public static String conPatkol = "Data Source=SLDB1\\SYTELINEDBC1;Initial Catalog=PATKOL_K2APP_DATA;Persist Security Info=True;User ID=sa;Password=P@ssw0rd; Connect Timeout=0; pooling=true; Max Pool Size=50000";
-        public static String conK2db5 = "Data Source=K2db5;Initial Catalog=K2;Persist Security Info=True;User ID=sa;Password=@Patkol.com@123;Connect Timeout=0; pooling=true; Max Pool Size=5000";
+        public static String con = "Data Source=K2DB1\\K2DBC1;Initial Catalog=K2;Persist Security Info=True;User ID=;Password=; Connect Timeout=0; pooling=true; Max Pool Size=50000";
+        public static String conHRPortal = "Data Source=SLDB1\\SYTELINEDBC1;Initial Catalog=HRPortal;Persist Security Info=True;User ID=;Password=; Connect Timeout=0; pooling=true; Max Pool Size=50000";
+        public static String conPKS = "Data Source=SLDB1\\SYTELINEDBC1;Initial Catalog=ERP_PKS_App;Persist Security Info=True;User ID=;Password=; Connect Timeout=0; pooling=true; Max Pool Size=50000";
+        public static String conPatkol = "Data Source=SLDB1\\SYTELINEDBC1;Initial Catalog=PATKOL_K2APP_DATA;Persist Security Info=True;User ID=;Password=; Connect Timeout=0; pooling=true; Max Pool Size=50000";
+        public static String conK2db5 = "Data Source=K2db5;Initial Catalog=K2;Persist Security Info=True;User ID=;Password=;Connect Timeout=0; pooling=true; Max Pool Size=5000";
 
         public string SeletSite_ref(string site_ref)
         {
